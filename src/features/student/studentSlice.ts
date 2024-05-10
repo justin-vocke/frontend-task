@@ -26,13 +26,7 @@ const initialState: StudentState = {
 };
 export const studentSlice = createSlice({
   name: "students",
-  initialState: {
-    loading: false,
-    status: "idle",
-    hasError: false,
-    error: null,
-    data: [],
-  },
+  initialState,
   reducers: {
     getStudentsSuccess: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -73,8 +67,8 @@ export const studentSlice = createSlice({
   },
 });
 
-export const { getTripsSuccess, getTripsError, getAllTripsRequest } =
-  tripSlice.actions;
+export const { getStudentsSuccess, getStudentsError, getAllStudentsRequest } =
+  studentSlice.actions;
 
 export const getAllStudents = createAsyncThunk(
   "trips/getAllTrips",
