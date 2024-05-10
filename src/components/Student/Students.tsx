@@ -25,11 +25,9 @@ export const Trips = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Date started</th>
-            <th>Date completed</th>
-            <th>Actions</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
           </tr>
         </thead>
         <tbody>
