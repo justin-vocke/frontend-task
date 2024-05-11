@@ -7,7 +7,6 @@ export const Create = () => {
   const [firstName, setfirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
-  const [dateCompleted, setDateCompleted] = useState("");
 
   let navigateTo = useNavigate();
 
@@ -32,7 +31,7 @@ export const Create = () => {
       age: age,
     };
     axios
-      .post("https://localhost:7093/api/Trips/AddTrip", studentObject)
+      .post("https://localhost:7119/api/Student", studentObject)
       .then((res) => {
         navigateTo("/trips");
       });

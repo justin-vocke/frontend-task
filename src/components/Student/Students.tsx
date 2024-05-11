@@ -2,25 +2,30 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 //import { selectAllTrips, getAllTrips } from "../../features/trip/tripSlice";
+import {
+  selectAllStudents,
+  getAllStudents,
+} from "../../features/student/studentSlice";
+import type { StudentInfo as StudentInfoType } from "../../features/student/studentSlice";
 import axios from "axios";
 export const Trips = () => {
   let navigateTo = useNavigate();
   const dispatch = useDispatch();
-  const allTrips = useSelector(selectAllTrips);
+  const allStudents = useSelector(selectAllStudents);
   const tripStatus = useSelector((state) => state.trips.status);
   const error = useSelector((state) => state.trips.error);
   useEffect(() => {
-    if (tripStatus === "idle") dispatch(getAllTrips());
+    if (tripStatus === "idle") dispatch(getAllStudents());
   }, [tripStatus, dispatch]);
 
-  const onTripUpdate = (id) => {
+  const onTripUpdate = (id: number) => {
     navigateTo("/update/" + id);
   };
 
-  const onTripDelete = (id) => {
+  const onTripDelete = (id: number) => {
     navigateTo("/delete/" + id);
   };
-  const renderAllTripsTable = (trips) => {
+  const renderAllStudentsTable = (students: StudentInfoType[]) => {
     return (
       <table className="table table-striped">
         <thead>
@@ -31,29 +36,25 @@ export const Trips = () => {
           </tr>
         </thead>
         <tbody>
-          {trips.map((trip) => (
-            <tr key={trip.id}>
-              <td>{trip.name}</td>
-              <td>{trip.description}</td>
-              <td>{new Date(trip.dateStarted).toISOString().slice(0, 10)}</td>
-              <td>
-                {trip.dateCompleted
-                  ? new Date(trip.dateCompleted).toISOString().slice(0, 10)
-                  : "-"}
-              </td>
+          {students.map((student) => (
+            <tr key={student.id}>
+              <td>{student.firstName}</td>
+              <td>{student.lastName}</td>
+              <td>{student.age}</td>
+
               <td>
                 <div className="form-group">
                   <input
                     type="button"
                     value="Update"
                     className="btn btn-success"
-                    onClick={() => onTripUpdate(trip.id)}
+                    onClick={() => onTripUpdate(student.id)}
                   />
                   <input
                     type="button"
                     value="Delete"
                     className="btn btn-danger"
-                    onClick={() => onTripDelete(trip.id)}
+                    onClick={() => onTripDelete(student.id)}
                   />
                 </div>
               </td>
@@ -71,7 +72,7 @@ export const Trips = () => {
       </p>
     );
   } else if (tripStatus === "succeeded") {
-    content = renderAllTripsTable(allTrips);
+    content = renderAllStudentsTable(allStudents);
   } else if (tripStatus === "failed") {
     content = <div>{error}</div>;
   }
