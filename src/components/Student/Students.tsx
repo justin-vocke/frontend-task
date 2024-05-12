@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,9 @@ import {
   getAllStudents,
 } from "../../features/student/studentSlice";
 import type { StudentInfo as StudentInfoType } from "../../features/student/studentSlice";
-import axios from "axios";
 
 export const Students = () => {
-  let navigateTo = useNavigate();
+  const navigateTo = useNavigate();
   const dispatch = useAppDispatch();
   const allStudents = useSelector(selectAllStudents);
   const tripStatus = useAppSelector((state) => state.students.status);

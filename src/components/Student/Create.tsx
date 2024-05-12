@@ -69,7 +69,7 @@ export const Create = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group pt-10">
           <input type="submit" value="Add trip" className="btn btn-primary" />
         </div>
       </form>
