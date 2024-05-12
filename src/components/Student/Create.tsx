@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type { StudentInfo as StudentInfoType } from "../../features/student/studentSlice";
 
 import axios from "axios";
 
@@ -8,7 +9,7 @@ export const Create = () => {
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
 
-  let navigateTo = useNavigate();
+  const navigateTo = useNavigate();
 
   const onChangeFirstName = (e) => {
     setfirstName(e.target.value);
@@ -25,7 +26,7 @@ export const Create = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    let studentObject = {
+    const studentObject = {
       firstName: firstName,
       lastName: lastName,
       age: age,
@@ -33,7 +34,7 @@ export const Create = () => {
     axios
       .post("https://localhost:7119/api/Student", studentObject)
       .then((res) => {
-        navigateTo("/trips");
+        navigateTo("/students");
       });
   };
   return (

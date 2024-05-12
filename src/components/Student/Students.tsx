@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+
 import { useNavigate } from "react-router-dom";
 //import { selectAllTrips, getAllTrips } from "../../features/trip/tripSlice";
 import {
@@ -8,12 +10,13 @@ import {
 } from "../../features/student/studentSlice";
 import type { StudentInfo as StudentInfoType } from "../../features/student/studentSlice";
 import axios from "axios";
-export const Trips = () => {
+
+export const Students = () => {
   let navigateTo = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const allStudents = useSelector(selectAllStudents);
-  const tripStatus = useSelector((state) => state.trips.status);
-  const error = useSelector((state) => state.trips.error);
+  const tripStatus = useAppSelector((state) => state.students.status);
+  const error = useAppSelector((state) => state.students.error);
   useEffect(() => {
     if (tripStatus === "idle") dispatch(getAllStudents());
   }, [tripStatus, dispatch]);
