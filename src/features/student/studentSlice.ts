@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "@reduxjs/toolkit/query";
+//import { RootState } from "@reduxjs/toolkit/query";
 import axios from "axios";
-
+import type { RootState } from "../../store";
 interface StudentInfo {
+  id: number;
   firstName: string;
   lastName: string;
   age: number | null;
@@ -12,7 +13,7 @@ interface StudentState {
   loading: boolean;
   status: string;
   hasError: boolean | null;
-  error: string | null;
+  error: string | undefined;
   data: StudentInfo[];
 }
 
@@ -21,7 +22,7 @@ const initialState: StudentState = {
   loading: false,
   status: "idle",
   hasError: false,
-  error: null,
+  error: undefined,
   data: [],
 };
 export const studentSlice = createSlice({
@@ -71,11 +72,9 @@ export const { getStudentsSuccess, getStudentsError, getAllStudentsRequest } =
   studentSlice.actions;
 
 export const getAllStudents = createAsyncThunk(
-  "trips/getAllTrips",
+  "students/getAllStudents",
   async () => {
-    const response = await axios.get(
-      "https://localhost:7093/api/Trips/GetTrips"
-    );
+    const response = await axios.get("https://localhost:7119/api/Student");
     return response.data;
   }
 );
@@ -83,6 +82,8 @@ export const getAllStudents = createAsyncThunk(
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectAllTrips = (state: RootState) => state.trips.data;
+export const selectAllStudents = (state: RootState) => state.students.data;
 
 export default studentSlice.reducer;
+
+export type { StudentInfo };

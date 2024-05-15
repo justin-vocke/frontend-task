@@ -7,7 +7,9 @@ export const store = configureStore({
   },
 });
 
+// Get the type of our store variable
+export type AppStore = typeof store;
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {students: StudentState}
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<AppStore["getState"]>;
+// Inferred type: {students: StudentsState}
+export type AppDispatch = AppStore["dispatch"];

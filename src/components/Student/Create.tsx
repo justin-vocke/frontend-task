@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type { StudentInfo as StudentInfoType } from "../../features/student/studentSlice";
 
 import axios from "axios";
 
@@ -7,9 +8,8 @@ export const Create = () => {
   const [firstName, setfirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
-  const [dateCompleted, setDateCompleted] = useState("");
 
-  let navigateTo = useNavigate();
+  const navigateTo = useNavigate();
 
   const onChangeFirstName = (e) => {
     setfirstName(e.target.value);
@@ -26,15 +26,15 @@ export const Create = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    let studentObject = {
+    const studentObject = {
       firstName: firstName,
       lastName: lastName,
       age: age,
     };
     axios
-      .post("https://localhost:7093/api/Trips/AddTrip", studentObject)
+      .post("https://localhost:7119/api/Student", studentObject)
       .then((res) => {
-        navigateTo("/trips");
+        navigateTo("/students");
       });
   };
   return (
@@ -69,7 +69,7 @@ export const Create = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group pt-10">
           <input type="submit" value="Add trip" className="btn btn-primary" />
         </div>
       </form>
